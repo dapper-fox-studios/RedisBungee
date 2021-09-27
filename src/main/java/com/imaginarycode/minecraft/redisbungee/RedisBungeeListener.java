@@ -30,13 +30,13 @@ import java.util.*;
 @AllArgsConstructor
 public class RedisBungeeListener implements Listener {
     private static final BaseComponent[] ALREADY_LOGGED_IN =
-            new ComponentBuilder("You are already logged on to this server.").color(ChatColor.RED)
-                    .append("\n\nIt may help to try logging in again in a few minutes.\nIf this does not resolve your issue, please contact staff.")
+            new ComponentBuilder("You're too speedy").color(ChatColor.RED)
+                    .append("\n\nYou logged back in a little too fast. Please try again in a few moments\nIf you keep seeing this message, please contact staff.")
                     .color(ChatColor.GRAY)
                     .create();
     private static final BaseComponent[] ONLINE_MODE_RECONNECT =
-            new ComponentBuilder("Whoops! You need to reconnect.").color(ChatColor.RED)
-                    .append("\n\nWe found someone online using your username. They were kicked and you may reconnect.\nIf this does not work, please contact staff.")
+            new ComponentBuilder("Oh, we seem to have hit a snag").color(ChatColor.RED)
+                    .append("\n\nYou logged back in a little too fast. Please try again in a few moments\nIf you keep seeing this message, please contact staff.")
                     .color(ChatColor.GRAY)
                     .create();
     private final RedisBungee plugin;
