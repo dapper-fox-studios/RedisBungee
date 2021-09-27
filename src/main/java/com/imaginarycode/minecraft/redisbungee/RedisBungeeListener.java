@@ -60,8 +60,8 @@ public class RedisBungeeListener implements Listener {
 
                         if (player != null) {
                             event.setCancelled(true);
-                            // TODO: Make it accept a BaseComponent[] like everything else.
                             event.setCancelReason(ONLINE_MODE_RECONNECT);
+
                             return null;
                         }
                     }
@@ -69,8 +69,12 @@ public class RedisBungeeListener implements Listener {
                     for (String s : plugin.getServerIds()) {
                         if (jedis.sismember("proxy:" + s + ":usersOnline", event.getConnection().getUniqueId().toString())) {
                             event.setCancelled(true);
-                            // TODO: Make it accept a BaseComponent[] like everything else.
                             event.setCancelReason(ALREADY_LOGGED_IN);
+
+                            Pipeline pipeline = jedis.pipelined();
+                            RedisUtil.cleanUpPlayer(event.getConnection().getUniqueId().toString(), pipeline);
+                            pipeline.sync();
+
                             return null;
                         }
                     }
